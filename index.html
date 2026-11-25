@@ -10368,6 +10368,29 @@ footer{padding:48px 5%;background:#030303;border-top:1px solid var(--line)}
     #events .gl-over::after { transition: none; }
 }
 
+
+/* ---- PARTNERS: equal tiles (event-specific) ---- */
+#partner .pw-partners{display:flex;flex-direction:column;gap:18px}
+#partner .pw-title-partner{grid-column:auto}
+#partner .pw-event-label{display:flex;align-items:center;gap:14px;margin-top:10px;color:var(--pw-muted,#aaa4a0);font-size:10px;font-weight:800;letter-spacing:1.6px}
+#partner .pw-event-label::before,#partner .pw-event-label::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.12)}
+#partner .pw-event-label i{color:var(--pw-gold,#d9ad48);margin-right:6px}
+#partner .pw-logo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+#partner .pw-logo-grid>.pw-logo{height:150px;min-height:150px;width:100%}
+#partner .pw-logo-grid>.pw-logo img{width:auto;height:auto;max-width:82%;max-height:96px}
+@media(max-width:1000px){#partner .pw-logo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){#partner .pw-partners{display:flex}#partner .pw-event-label{font-size:8px;letter-spacing:1px}#partner .pw-logo-grid>.pw-logo{height:120px;min-height:120px}}
+
+/* ---- partner hover label ---- */
+#partner .pw-logo-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+#partner .pw-logo-grid>.pw-logo{position:relative;overflow:hidden;outline:none}
+#partner .pw-hover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px;text-align:center;
+  background:linear-gradient(180deg,rgba(227,27,35,.92),rgba(143,11,16,.96));opacity:0;transform:translateY(100%);transition:transform .4s cubic-bezier(.2,.7,.2,1),opacity .3s;pointer-events:none}
+#partner .pw-hover-role{font-size:9px;font-weight:900;letter-spacing:1.6px;color:#ffe3a3}
+#partner .pw-hover strong{font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:24px;line-height:1;letter-spacing:1px;color:#fff}
+#partner .pw-logo:hover .pw-hover,#partner .pw-logo:focus-visible .pw-hover,#partner .pw-logo.show .pw-hover{opacity:1;transform:none}
+@media(max-width:1000px){#partner .pw-logo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){#partner .pw-logo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#partner .pw-hover strong{font-size:20px}}
 </style>
 </head>
 
@@ -12055,24 +12078,33 @@ footer{padding:48px 5%;background:#030303;border-top:1px solid var(--line)}
 
     <div class="pw-partners">
 
-      <!-- title partner -->
-      <div class="pw-title-partner">
-        <div class="pw-tp-logo"><img src="badman.png" alt="Badman Gym"></div>
-        <div>
-          <span class="pw-tag">TITLE PARTNER</span>
-          <h3>BADMAN <em>GYM</em></h3>
-          <p>Title Partner of the All India Open Deadlift Championship 2026.</p>
-        </div>
+      <div class="pw-event-label">
+        <span><i class="fa-solid fa-trophy"></i> PARTNERS · ALL INDIA OPEN DEADLIFT CHAMPIONSHIP 2026</span>
       </div>
 
-      <div class="pw-logo"><img src="bbd.png" alt="Partner"></div>
-      <div class="pw-logo"><img src="rgi.jpg" alt="Partner"></div>
-<div class="pw-logo"><img src="bephit.jpeg" alt="Partner"></div>
-
-      <a class="pw-logo pw-logo-empty" href="#" onclick="document.getElementById('pwJoin').scrollIntoView({behavior:'smooth'});return false;">
-        <i class="fa-solid fa-plus"></i>
-        <span>YOUR BRAND</span>
-      </a>
+      <div class="pw-logo-grid">
+        <div class="pw-logo" tabindex="0">
+          <img src="bbd.png" alt="Powered By">
+          <div class="pw-hover"><span class="pw-hover-role">POWERED BY</span><strong>BBD Health &amp; Nutrition</strong></div>
+        </div>
+        <div class="pw-logo" tabindex="0">
+          <img src="badman.png" alt="Badman Gym">
+          <div class="pw-hover"><span class="pw-hover-role">TITLE PARTNER</span><strong>Badman Group</strong></div>
+        </div>
+        <div class="pw-logo" tabindex="0">
+          <img src="rgi.jpg" alt="Education Partner">
+          <div class="pw-hover"><span class="pw-hover-role">EDUCATION PARTNER</span><strong>RGI Group of Institutes</strong></div>
+        </div>
+        <div class="pw-logo" tabindex="0">
+          <img src="bephit.jpeg" alt="Apparel Partner">
+          <div class="pw-hover"><span class="pw-hover-role">APPAREL PARTNER</span><strong>Bephit</strong></div>
+        </div>
+        
+        <a class="pw-logo pw-logo-empty" href="#" onclick="document.getElementById('pwJoin').scrollIntoView({behavior:'smooth'});return false;">
+          <i class="fa-solid fa-plus"></i>
+          <span>YOUR BRAND</span>
+        </a>
+      </div>
 
     </div>
   </div>
@@ -13440,5 +13472,8 @@ document.addEventListener(
 
 </script>
 
+<script>
+document.querySelectorAll('#partner .pw-logo-grid>.pw-logo:not(.pw-logo-empty)').forEach(function(el){el.addEventListener('click',function(){var on=el.classList.contains('show');document.querySelectorAll('#partner .pw-logo.show').forEach(function(x){x.classList.remove('show')});if(!on)el.classList.add('show')})});
+</script>
 </body>
 </html>
